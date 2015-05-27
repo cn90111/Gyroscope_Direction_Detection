@@ -47,6 +47,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -64,12 +65,9 @@ public class BluetoothChat extends Activity {
     Button buttonStart;
     RelativeLayout background;
     boolean addGO = false;
-    
-    TextView textX;
-	TextView textY;
-	TextView textZ;
-    
-  
+ 
+    TextView textView_State;
+    ImageView secondImage;
 	
     // Debugging
     private static final String TAG = "BluetoothChat";
@@ -242,13 +240,17 @@ public class BluetoothChat extends Activity {
 				// TODO Auto-generated method stub
 				setContentView(R.layout.activity_main);//切換到指定Layout，不用切換Activity
 				
-				textX = (TextView) findViewById(R.id.textView2);
-		        textY = (TextView) findViewById(R.id.textView3);
-		        textZ = (TextView) findViewById(R.id.textView4);
+				textView_State = (TextView) findViewById(R.id.textView_State);
+				secondImage = (ImageView) findViewById(R.id.imageView1);
 				
-				background = (RelativeLayout)findViewById(R.id.Background);
+				textView_State.setText("未過磅 請進入過磅站");
+				secondImage.setImageResource(R.drawable.red_light);
+				//background = (RelativeLayout)findViewById(R.id.Background);
 				
-				background.setBackgroundColor(Color.RED);
+				//background.setBackgroundColor(Color.RED);
+				
+				
+				
 				
 				addGO = true;
 			}
@@ -307,16 +309,18 @@ public class BluetoothChat extends Activity {
 					
 					if(dispZ < minTake || dispZ > maxTake)
 					{
-//						textX.setText("X: " + String.valueOf(dispX));
-//						textY.setText("Y: " + String.valueOf(dispY));
-						textZ.setText("Z: " + String.valueOf(dispZ));
+
 						
 						if(dispZ > 0)
 						{
 							n++;
 							if(n>50)
 							{
-								background.setBackgroundColor(Color.RED);	
+								//background.setBackgroundColor(Color.RED);	
+
+								textView_State.setText("未過磅 請進入過磅站");
+								secondImage.setImageResource(R.drawable.red_light);
+								
 							}
 						}
 						else
@@ -341,7 +345,9 @@ public class BluetoothChat extends Activity {
 	{
 		if(addGO)
 		{
-			background.setBackgroundColor(Color.GREEN);
+			//background.setBackgroundColor(Color.GREEN);
+			textView_State.setText("已過磅 祝行車平安");
+			secondImage.setImageResource(R.drawable.green_light);
 		}
 	}
 	

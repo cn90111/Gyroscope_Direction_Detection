@@ -5,44 +5,22 @@
     android:layout_height="match_parent"
     tools:context="com.example.addv.MainActivity" >
 
-
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="38dp"
-        android:orientation="vertical" >
- 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:text="手機狀態(陀螺儀)"
-            android:textSize="25sp" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/red_light" />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="35sp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="35sp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textSize="35sp" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView_State"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
