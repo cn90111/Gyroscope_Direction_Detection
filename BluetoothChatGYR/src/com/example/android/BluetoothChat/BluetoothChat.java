@@ -114,8 +114,6 @@ public class BluetoothChat extends Activity {
 
         // Set up the window layout
         setContentView(R.layout.main);//切換到指定Layout，不用切換Activity
-
-        
         
         // Get local Bluetooth adapter
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -245,12 +243,7 @@ public class BluetoothChat extends Activity {
 				
 				textView_State.setText("未過磅 請進入過磅站");
 				secondImage.setImageResource(R.drawable.red_light);
-				//background = (RelativeLayout)findViewById(R.id.Background);
-				
-				//background.setBackgroundColor(Color.RED);
-				
-				
-				
+
 				
 				addGO = true;
 			}
@@ -282,7 +275,9 @@ public class BluetoothChat extends Activity {
     	
     	float maxTake = 0.18f;
 		float minTake = -0.18f;
-
+		
+		float changeColorGate = 1.25f; //敏感度調整
+		
 		int n = 0;
 		boolean getBase = false;
 		
@@ -293,42 +288,28 @@ public class BluetoothChat extends Activity {
 			
 			if(addGO)
 			{
-//				if(!getBase)
-//				{
-//					tempX = event.values[0];
-//					tempY = event.values[1];
-//					tempZ = event.values[2];
-//					
-//					getBase = true;
-//				}
-//				else
-//				{
-//					dispX = event.values[0] - tempX;
-//					dispY = event.values[1] - tempY;
-					dispZ = event.values[2] - tempZ;
+				dispZ = event.values[2] - tempZ;
 					
-					if(dispZ < minTake || dispZ > maxTake)
-					{
+				if(dispZ < minTake || dispZ > maxTake)
+				{
 
 						
-						if(dispZ > 0)
+					if(dispZ > changeColorGate)
+					{
+						n++;
+						if(n>50)
 						{
-							n++;
-							if(n>50)
-							{
-								//background.setBackgroundColor(Color.RED);	
-
-								textView_State.setText("未過磅 請進入過磅站");
-								secondImage.setImageResource(R.drawable.red_light);
+							
+							textView_State.setText("未過磅 請進入過磅站");
+							secondImage.setImageResource(R.drawable.red_light);
 								
-							}
 						}
-						else
-						{
-							n=0;
-						}
-					}	
-//				}
+					}
+					else
+					{
+						n=0;
+					}
+				}	
 			}
 		}
 
@@ -345,7 +326,6 @@ public class BluetoothChat extends Activity {
 	{
 		if(addGO)
 		{
-			//background.setBackgroundColor(Color.GREEN);
 			textView_State.setText("已過磅 祝行車平安");
 			secondImage.setImageResource(R.drawable.green_light);
 		}
@@ -499,7 +479,7 @@ public class BluetoothChat extends Activity {
                                + mConnectedDeviceName, Toast.LENGTH_SHORT).show();
                 break;
             case MESSAGE_TOAST://氣泡訊息
-                Toast.makeText(getApplicationContext(),"123" + msg.getData().getString(TOAST),
+                Toast.makeText(getApplicationContext(),msg.getData().getString(TOAST),
                                Toast.LENGTH_SHORT).show();
                 break;
             }
